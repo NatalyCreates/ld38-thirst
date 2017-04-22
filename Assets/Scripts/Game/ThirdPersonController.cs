@@ -6,8 +6,8 @@ public class ThirdPersonController : MonoBehaviour {
 
     public float mouseSensitivityX = 100f;
     public float mouseSensitivityY = 100f;
-    public float walkSpeed = 5f;
-    public float jumpForce = 220f;
+    public float walkSpeed = 8f;
+    public float jumpForce = 400f;
 
     public LayerMask groundedMask;
 
@@ -22,7 +22,7 @@ public class ThirdPersonController : MonoBehaviour {
     bool grounded;
 
     void Start () {
-        cameraT = Camera.main.transform;
+        //cameraT = Camera.main.transform;
         rigid = GetComponent<Rigidbody>();
     }
 	

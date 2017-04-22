@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-    public GameObject hero;
+    public GameObject player;
     Vector3 offset;
     float rate = 5f;
 
 	void Start () {
-        offset = transform.position - hero.transform.position;
+        offset = transform.position - player.transform.position;
+        Debug.Log(offset);
     }
 	
 	void LateUpdate () {
 
-        transform.up = hero.transform.up;
-        //hero.transform.forward = transform.forward;
+        transform.up = player.transform.up;
 
-        Vector3 desiredPos = hero.transform.position + offset;
-        //Vector3 pos = Vector3.Lerp(transform.position, desiredPos, rate * Time.deltaTime);
-        transform.position = desiredPos;
-        transform.LookAt(hero.transform);
-        transform.Rotate(Vector3.forward, hero.transform.rotation.eulerAngles.z);
+        Vector3 desiredPos = player.transform.position + offset;
+        Vector3 pos = Vector3.Lerp(transform.position, desiredPos, rate * Time.deltaTime);
+        //transform.position = desiredPos;
+        transform.position = pos;
+        transform.LookAt(player.transform);
+        transform.Rotate(Vector3.forward, player.transform.rotation.eulerAngles.z);
+
         //transform.Rotate(Vector3.right, -hero.transform.rotation.eulerAngles.x);
     }
 }
