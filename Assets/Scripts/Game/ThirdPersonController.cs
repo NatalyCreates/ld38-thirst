@@ -6,8 +6,8 @@ public class ThirdPersonController : MonoBehaviour {
 
     public float mouseSensitivityX = 100f;
     public float mouseSensitivityY = 100f;
-    public float walkSpeed = 8f;
-    public float jumpForce = 400f;
+    float walkSpeed = 15f;
+    float jumpForce = 400f;
 
     public LayerMask groundedMask;
 
