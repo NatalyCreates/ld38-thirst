@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class ThirdPersonController : MonoBehaviour {
 
-    public float mouseSensitivityX = 100f;
-    public float mouseSensitivityY = 100f;
-    float walkSpeed = 15f;
-    float jumpForce = 400f;
+    public float walkSpeed = 15f;
+    public float jumpForce = 300f;
 
     public LayerMask groundedMask;
 

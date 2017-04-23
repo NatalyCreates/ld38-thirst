@@ -1,14 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GravityAttractor : MonoBehaviour {
 
     public float gravity = -10f;
 
+    public GameObject dbgTxt;
+
 	public void Attract (Transform body, float setHeight = 0f) {
         Vector3 gravityUp = (body.position - transform.position).normalized;
         Vector3 bodyUp = body.up;
+
+        /*
+        if (body.gameObject.name == "Platform")
+        {
+            string dbg = "Distance from Planet for object " + body.gameObject.name + " is " + Vector3.Distance(body.position, transform.position);
+            Debug.Log(dbg);
+            dbgTxt.GetComponent<Text>().text = dbg;
+        }*/
 
         //Debug.Log("Dist is: " + Vector3.Distance(body.position, transform.position));
         if (Vector3.Distance(body.position, transform.position) > setHeight)
