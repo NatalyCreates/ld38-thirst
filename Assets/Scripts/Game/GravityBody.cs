@@ -14,6 +14,15 @@ public class GravityBody : MonoBehaviour {
     }
 	
 	void FixedUpdate () {
-        attractor.Attract(myTransform);
-	}
+        
+        if (tag == "platform")
+        {
+            float h = GetComponent<Platform>().height;
+            attractor.Attract(myTransform, 20 + h);
+        }
+        else
+        {
+            attractor.Attract(myTransform);
+        }
+    }
 }

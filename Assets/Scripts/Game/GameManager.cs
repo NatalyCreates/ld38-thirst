@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -17,8 +18,12 @@ public class GameManager : MonoBehaviour {
     List<Color> mountainTargetColors;
 
     public GameObject worldCam, behindCam;
+    public GameObject curtain;
 
     bool gameWon = false;
+
+    float startTime;
+    float timeCurtain = 0f;
 
     void Awake () {
 
@@ -42,6 +47,8 @@ public class GameManager : MonoBehaviour {
 
     void Start ()
     {
+        startTime = Time.time;
+
         mountains = new List<Renderer>();
         mountainColors = new List<Color>();
         mountainTargetColors = new List<Color>();
@@ -60,22 +67,37 @@ public class GameManager : MonoBehaviour {
 	
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Time.time > startTime + 5f)
         {
-            if (behindCam.active)
+            if (curtain.active)
             {
-                Debug.Log("a");
-                worldCam.SetActive(true);
-                behindCam.SetActive(false);
-            }
-            else if (worldCam.active)
-            {
-                Debug.Log("b");
-                behindCam.SetActive(true);
-                worldCam.SetActive(false);
+
+                curtain.GetComponent<Image>().color = Color.Lerp(Color.black, new Color(1f, 1f, 1f, 0f), timeCurtain / 3f);
+                timeCurtain += Time.deltaTime;
             }
         }
 
+        if (Time.time > startTime + 8f)
+        {
+            curtain.SetActive(false);
+
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                if (behindCam.active)
+                {
+                    Debug.Log("a");
+                    worldCam.SetActive(true);
+                    behindCam.SetActive(false);
+                }
+                else if (worldCam.active)
+                {
+                    Debug.Log("b");
+                    behindCam.SetActive(true);
+                    worldCam.SetActive(false);
+                }
+            }
+        }
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("menu");

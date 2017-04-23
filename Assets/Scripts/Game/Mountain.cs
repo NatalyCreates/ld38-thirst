@@ -7,6 +7,10 @@ public class Mountain : MonoBehaviour {
     GravityAttractor attractor;
     Transform myTransform;
 
+    float creationTime = 0f;
+
+    bool touchingEarth = false;
+
     void Awake () {
         attractor = GameObject.FindGameObjectWithTag("earth").GetComponent<GravityAttractor>();
 
@@ -20,9 +24,27 @@ public class Mountain : MonoBehaviour {
         colors[2] = new Color(85f / 255f, 42f / 255f, 5f / 255f);
 
         gameObject.GetComponent<Renderer>().material.color = colors[Random.Range(0,3)];
-	}
+
+        creationTime = Time.time;
+    }
 	
 	void FixedUpdate () {
         attractor.Attract(myTransform);
 	}
+
+    void Update ()
+    {
+        if (Time.time >= creationTime + 4f)
+        {
+            if (!touchingEarth) Destroy(gameObject);
+        }
+    }
+
+    void OnCollisionEnter (Collision col)
+    {
+        if (col.gameObject.tag == "earth")
+        {
+            touchingEarth = true;
+        }
+    }
 }
