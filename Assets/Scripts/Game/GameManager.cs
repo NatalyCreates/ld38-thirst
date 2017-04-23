@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour {
     List<Color> mountainColors;
     List<Color> mountainTargetColors;
 
+    public GameObject worldCam, behindCam;
+
     bool gameWon = false;
 
     void Awake () {
@@ -50,7 +52,6 @@ public class GameManager : MonoBehaviour {
             float h, s, v;
             Color.RGBToHSV(g.GetComponent<Renderer>().material.color, out h, out s, out v);
             h += 0.3f;
-            Debug.Log(h);
             mountainTargetColors.Add(Color.HSVToRGB(h, s, v));
         }
 
@@ -58,6 +59,22 @@ public class GameManager : MonoBehaviour {
     }
 	
 	void Update () {
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (behindCam.active)
+            {
+                Debug.Log("a");
+                worldCam.SetActive(true);
+                behindCam.SetActive(false);
+            }
+            else if (worldCam.active)
+            {
+                Debug.Log("b");
+                behindCam.SetActive(true);
+                worldCam.SetActive(false);
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
