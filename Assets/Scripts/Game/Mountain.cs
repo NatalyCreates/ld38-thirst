@@ -7,7 +7,7 @@ public class Mountain : MonoBehaviour {
     GravityAttractor attractor;
     Transform myTransform;
 
-    void Start () {
+    void Awake () {
         attractor = GameObject.FindGameObjectWithTag("earth").GetComponent<GravityAttractor>();
 
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;

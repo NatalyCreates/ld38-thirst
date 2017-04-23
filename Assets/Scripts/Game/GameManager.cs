@@ -9,8 +9,18 @@ public class GameManager : MonoBehaviour {
     public GameObject mountainPrefab;
     public Transform terrainParent;
 
-	void Start () {
-		for (int i = 0; i < 20; i++)
+    public Material brownEarth, greenEarth;
+    Renderer earthRend;
+    float lerpT = 0f;
+    List<Renderer> mountains;
+    List<Color> mountainColors;
+    List<Color> mountainTargetColors;
+
+    bool gameWon = false;
+
+    void Awake () {
+
+        for (int i = 0; i < 15; i++)
         {
             float randY;
             int opt = Random.Range(0, 2);
@@ -22,16 +32,60 @@ public class GameManager : MonoBehaviour {
             {
                 randY = Random.Range(20f, 50f);
             }
-            
+
             Vector3 pos = new Vector3(Random.Range(-50f, 50f), randY, Random.Range(-50f, 50f));
             Instantiate(mountainPrefab, pos, Quaternion.identity, terrainParent);
         }
-	}
+    }
+
+    void Start ()
+    {
+        mountains = new List<Renderer>();
+        mountainColors = new List<Color>();
+        mountainTargetColors = new List<Color>();
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("mountain"))
+        {
+            mountains.Add(g.GetComponent<Renderer>());
+            mountainColors.Add(g.GetComponent<Renderer>().material.color);
+            float h, s, v;
+            Color.RGBToHSV(g.GetComponent<Renderer>().material.color, out h, out s, out v);
+            h += 0.3f;
+            Debug.Log(h);
+            mountainTargetColors.Add(Color.HSVToRGB(h, s, v));
+        }
+
+        earthRend = GameObject.FindGameObjectWithTag("earth").GetComponent<Renderer>();
+    }
 	
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("menu");
         }
+        
+        if (gameWon)
+        {
+            for (int i=0; i < mountains.Count; i++)
+            {
+                mountains[i].material.color = Color.Lerp(mountains[i].material.color, mountainTargetColors[i], lerpT / 2f * Time.deltaTime);
+            }
+            lerpT += Time.deltaTime;
+
+            if (lerpT >= 2f)
+            {
+                gameWon = false;
+                earthRend.material = greenEarth;
+                for (int i = 0; i < mountains.Count; i++)
+                {
+                    mountains[i].material.color = mountainTargetColors[i];
+                }
+            }
+        }
 	}
+
+    public void WinGame ()
+    {
+        gameWon = true;
+    }
 }

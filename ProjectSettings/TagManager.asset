@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - earth
+  - mountain
+  - player
+  - cam
   layers:
   - Default
   - TransparentFX
