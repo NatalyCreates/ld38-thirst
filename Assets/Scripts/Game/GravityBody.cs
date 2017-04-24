@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class GravityBody : MonoBehaviour {
 
-    public GravityAttractor attractor;
+    GravityAttractor attractor;
     Transform myTransform;
 
     void Start () {
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         GetComponent<Rigidbody>().useGravity = false;
         myTransform = transform;
+        attractor = GameObject.FindGameObjectWithTag("earth").GetComponent<GravityAttractor>();
     }
 	
 	void FixedUpdate () {

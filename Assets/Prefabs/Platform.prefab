@@ -38,13 +38,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1319268610586320}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 30, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 0.1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!23 &23031543672697480
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -121,7 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848a237e2c25e364aa5e176a0b7632a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attractor: {fileID: 0}
 --- !u!114 &114884324323562772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,4 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1461f4b74790dcd4e8c0a5846cb23614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 5
+  height: 2
+  waterPrefab: {fileID: 1881189011715656, guid: cc2d3a13dd263fe4e96e148bbd47ea37,
+    type: 2}

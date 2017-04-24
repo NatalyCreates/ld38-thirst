@@ -39,6 +39,7 @@ public class ThirdPersonController : MonoBehaviour {
             if (grounded)
             {
                 rigid.AddForce(transform.up * jumpForce);
+                Audio.Instance.PlayJumpSound();
             }
         }
 
